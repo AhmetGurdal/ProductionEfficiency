@@ -1,1 +1,1 @@
-export * from './tomato'
+export * from './plants'

@@ -1,40 +1,36 @@
 // eslint-disable-next-line no-use-before-define
 import React from 'react'
-import { Container, Row, Col, Button, Form } from 'react-bootstrap'
+import { Container, Row, Col, Form } from 'react-bootstrap'
+import { PLANT_LIST } from 'production-efficiency/constants/'
 
 export const Home = () => {
     return (
         <Container fluid>
-            <Row>
-                <Col md={12} className='text-center'>
+            <Row className='text-center'>
+                <Col md={12}>
                     <h2>Efficiency Calculator</h2>
                 </Col>
-
-                <Col md={4}>
+            </Row>
+            <hr />
+            <Row className='justify-content-center'>
+                <Col md={6}>
                     <Form>
-                        <Form.Group as={Row} controlId='formPlaintextPassword'>
-                            <Form.Label column sm='4'>
-                                Password
-                            </Form.Label>
-                            <Col sm='8'>
-                                <Form.Control
-                                    type='password'
-                                    placeholder='Password'
-                                />
-                            </Col>
+                        <Form.Group controlId='exampleForm.ControlSelect1'>
+                            <Form.Control as='select'>
+                                <option selected disabled hidden>
+                                    Select a plant
+                                </option>
+
+                                {PLANT_LIST.map((plant) => {
+                                    return (
+                                        <option key={plant.name}>
+                                            {plant.name}
+                                        </option>
+                                    )
+                                })}
+                            </Form.Control>
                         </Form.Group>
                     </Form>
-                </Col>
-                <Col md={{ span: 2, offset: 1 }} className='align-self-center'>
-                    <Button block>Click Me !!</Button>
-                </Col>
-                <Col
-                    md={{
-                        span: 4,
-                        offset: 1
-                    }}
-                >
-                    sağ
                 </Col>
             </Row>
         </Container>

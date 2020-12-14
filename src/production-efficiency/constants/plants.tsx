@@ -1,7 +1,7 @@
 import { Plant } from 'production-efficiency/models'
 
-export const TOMATO_DATA: Plant = {
-    name: 'tomato',
+const tomato: Plant = {
+    name: 'Tomato',
     description: 'I am an aweful red tomato ;)',
     requirements: {
         mineral: [
@@ -78,3 +78,5 @@ export const TOMATO_DATA: Plant = {
         ]
     }
 }
+
+export const PLANT_LIST: Plant[] = [tomato]
