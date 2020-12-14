@@ -13,7 +13,7 @@ import {
 //  Project Dependencies
 // ---------------------------
 
-import './App.css';
+import './App.css'; 
 import { NavigBar } from './components';
 import { About, Home } from './pages';
 
