@@ -4,7 +4,12 @@
 //  External Dependencies
 // ---------------------------
 import { Button } from "react-bootstrap";
-
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
@@ -12,25 +17,52 @@ import logo from './logo.svg';
 import './App.css';
 
 
+const Home = () => {
+  return (
+    <div>
+      <h2>
+        Home Page
+      </h2>
+    </div>
+  )
+}
+
+const About = () => {
+  return (
+    <div>
+      <h2>
+        About Page
+      </h2>
+    </div>
+  )
+}
 
 const App = () => (
-  <div className="App">
-    <header className="App-header">
-      <img src={logo} className="App-logo" alt="logo" />
-      <p>
-        Edit <code>src/App.js</code> and save to reload.
-      </p>
-      <a
-        className="App-link"
-        href="https://reactjs.org"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        Learn React
-      </a>
-    </header>
-    <Button>This is a button</Button>
-  </div>
+  <Router>
+    <div>
+        <nav>
+          <ul>
+            <li>
+              <Link to="/">Home</Link>
+            </li>
+            <li>
+              <Link to="/about">About</Link>
+            </li>
+          </ul>
+        </nav>
+
+      <div>
+          <Switch>
+            <Route path="/about">
+              <About />
+            </Route>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+  </Router>
 )
 
 export default App
