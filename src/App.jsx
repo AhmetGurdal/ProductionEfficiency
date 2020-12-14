@@ -3,17 +3,16 @@
 // ---------------------------
 //  External Dependencies
 // ---------------------------
-import { Button } from "react-bootstrap";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
+
 } from "react-router-dom";
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import logo from './logo.svg';
+
 import './App.css';
 import { NavigBar } from './components';
 import { About, Home } from './pages';
