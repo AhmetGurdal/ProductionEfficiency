@@ -1,4 +1,7 @@
 export interface Requirements {
     name: string
-    type: string
+    unit: string
+    min: number
+    max: number
+    average: number
 }

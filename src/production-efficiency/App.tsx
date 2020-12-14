@@ -13,8 +13,8 @@ import { About, Home } from 'production-efficiency/pages'
 const App = () => (
     <Router>
         <div>
-            <NavigBar />
-
+            <NavigBa />
+r
             <main className='pt-4'>
                 <Switch>
                     <Route path='/about'>
