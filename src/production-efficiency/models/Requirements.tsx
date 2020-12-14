@@ -3,5 +3,5 @@ export interface Requirements {
     unit: string
     min: number
     max: number
-    average: number
+    avg: number
 }
