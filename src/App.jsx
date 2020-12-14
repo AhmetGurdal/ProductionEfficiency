@@ -24,15 +24,16 @@ const App = () => (
     <div>
       <NavigBar />
 
-      <Switch>
-        <Route path="/about">
-          <About />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
-
+      <main className="pt-4">
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
+      </main>
     </div>
   </Router>
 )

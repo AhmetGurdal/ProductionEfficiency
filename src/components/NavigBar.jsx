@@ -7,10 +7,9 @@ import { Nav,Navbar } from "react-bootstrap"
 export const NavigBar = () => {
 	return (
 		<Navbar bg="light" expand="lg">
-			<Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
 			<Navbar.Toggle aria-controls="basic-navbar-nav" />
 			<Navbar.Collapse id="basic-navbar-nav">
-				<Nav className="mr-auto">
+				<Nav className="mx-auto">
 					<Link className='nav-link' to='/'>Home</Link>
 					<Link className='nav-link' to='/about'>About</Link>
 				</Nav>

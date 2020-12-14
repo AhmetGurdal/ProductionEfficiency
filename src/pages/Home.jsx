@@ -1,4 +1,4 @@
-import { Container, Row, Col, Button } from 'react-bootstrap'
+import { Container, Row, Col, Button, Form } from 'react-bootstrap'
 
 export const Home = () => {
 	return (
@@ -10,48 +10,29 @@ export const Home = () => {
 					</h2>
 				</Col>
 
-				<Col md={5} className="text-center">
-					<Row>
-						<Col md={6} className="text-center">
-							label
-						</Col>
-						<Col md={6} className="text-center">
-							form input
-						</Col>
-					</Row>
-					<Row>
-						<Col md={6} className="text-center">
-							label
-						</Col>
-						<Col md={6} className="text-center">
-							form input
-						</Col>
-					</Row>
-					<Row>
-						<Col md={6} className="text-center">
-							label
-						</Col>
-						<Col md={6} className="text-center">
-							form input
-						</Col>
-					</Row>
-					<Row>
-						<Col md={6} className="text-center">
-							label
-						</Col>
-						<Col md={6} className="text-center">
-							form input
-						</Col>
-					</Row>
+				<Col md={4}>
+					<Form>
+						<Form.Group as={Row} controlId="formPlaintextPassword">
+							<Form.Label column sm="4">
+								Password
+    						</Form.Label>
+							<Col sm="8">
+								<Form.Control type="password" placeholder="Password" />
+							</Col>
+						</Form.Group>
+					</Form>
 				</Col>
-				<Col md={2} className="text-center align-self-center">
-					<Button>Click Me !!</Button>
+				<Col md={{span:2, offset:1}} className="align-self-center">
+					<Button block>Click Me !!</Button>
 				</Col>
-				<Col md={5} className="text-center">
+				<Col md={{
+					span:4,
+					offset:1
+				}}>
 					sağ
 				</Col>
 			</Row>
-		
+
 		</Container>
 	)
 }
