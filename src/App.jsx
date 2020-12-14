@@ -15,34 +15,24 @@ import {
 // ---------------------------
 import logo from './logo.svg';
 import './App.css';
-import {NavigBar} from './components'
-import {About, Home} from './pages'
+import { NavigBar } from './components';
+import { About, Home } from './pages';
 
 
 const App = () => (
   <Router>
     <div>
-      {/* <nav>
-        <ul>
-          <li>
-            <Link to="/">Home</Link>
-          </li>
-          <li>
-            <Link to="/about">About</Link>
-          </li>
-        </ul>
-      </nav> */}
       <NavigBar />
-      <div>
-        <Switch>
-          <Route path="/about">
-            <About />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </div>
+
+      <Switch>
+        <Route path="/about">
+          <About />
+        </Route>
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+
     </div>
   </Router>
 )
