@@ -15,53 +15,34 @@ import {
 // ---------------------------
 import logo from './logo.svg';
 import './App.css';
+import {About, Home} from './pages';
 
-
-const Home = () => {
-  return (
-    <div>
-      <h2>
-        Home Page
-      </h2>
-    </div>
-  )
-}
-
-const About = () => {
-  return (
-    <div>
-      <h2>
-        About Page
-      </h2>
-    </div>
-  )
-}
 
 const App = () => (
   <Router>
     <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/about">About</Link>
-            </li>
-          </ul>
-        </nav>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+      </nav>
 
       <div>
-          <Switch>
-            <Route path="/about">
-              <About />
-            </Route>
-            <Route path="/">
-              <Home />
-            </Route>
-          </Switch>
-        </div>
+        <Switch>
+          <Route path="/about">
+            <About />
+          </Route>
+          <Route path="/">
+            <Home />
+          </Route>
+        </Switch>
       </div>
+    </div>
   </Router>
 )
 
