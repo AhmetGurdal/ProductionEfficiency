@@ -6,7 +6,7 @@ export const Home = () => {
 			<Row>
 				<Col md={12} className="text-center">
 					<h2>
-						emre
+						Efficiency Calculator
 					</h2>
 				</Col>
 
