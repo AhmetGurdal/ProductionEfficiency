@@ -15,13 +15,14 @@ import {
 // ---------------------------
 import logo from './logo.svg';
 import './App.css';
-import {About, Home} from './pages';
+import {NavigBar} from './components'
+import {About, Home} from './pages'
 
 
 const App = () => (
   <Router>
     <div>
-      <nav>
+      {/* <nav>
         <ul>
           <li>
             <Link to="/">Home</Link>
@@ -30,8 +31,8 @@ const App = () => (
             <Link to="/about">About</Link>
           </li>
         </ul>
-      </nav>
-
+      </nav> */}
+      <NavigBar />
       <div>
         <Switch>
           <Route path="/about">
