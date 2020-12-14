@@ -1,6 +1,16 @@
+
+
+// ---------------------------
+//  External Dependencies
+// ---------------------------
+import { Button } from "react-bootstrap";
+
+// ---------------------------
+//  Project Dependencies
+// ---------------------------
 import logo from './logo.svg';
 import './App.css';
-import { Button } from "react-bootstrap";
+
 
 
 const App = () => (
