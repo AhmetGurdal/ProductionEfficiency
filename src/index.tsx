@@ -9,7 +9,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-import App from './App'
+import App from 'production-efficiency/App'
 
 ReactDOM.render(
     <React.StrictMode>

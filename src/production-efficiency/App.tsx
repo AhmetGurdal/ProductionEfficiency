@@ -3,13 +3,12 @@
 // ---------------------------
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+
 // ---------------------------
 //  Project Dependencies
 // ---------------------------
-
-import './App.css'
-import { NavigBar } from './components'
-import { About, Home } from './pages'
+import { NavigBar } from 'production-efficiency/components'
+import { About, Home } from 'production-efficiency/pages'
 
 const App = () => (
     <Router>
