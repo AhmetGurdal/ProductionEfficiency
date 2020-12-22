@@ -1,16 +1,23 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { PLANT_LIST } from 'production-efficiency/constants/'
 import { Plant, Requirements } from 'production-efficiency/models'
 
 export const Home = () => {
     const INITIAL_PLANT = PLANT_LIST[0]
+    const REQUIREMENT_FIELD = 'requirement-field'
+
+    const formRef = useRef<HTMLFormElement>(null)
 
     // states
     const [selectedPlantId, setSelectedPlantId] = useState<number>(
         INITIAL_PLANT.id
     )
+
+    // const [formSubmitState, setFormSubmitState] = useState<
+    //     Record<string, string>
+    // >({})
 
     // constants
     const selectedPlant: Plant = PLANT_LIST[selectedPlantId]
@@ -21,6 +28,21 @@ export const Home = () => {
         // ...
     }
 
+    const formSubmitEvent = (event: React.FormEvent<any>) => {
+        event.preventDefault()
+        const collection = formRef.current?.getElementsByClassName(
+            REQUIREMENT_FIELD
+        )
+        collection &&
+            Array.from(collection).forEach((element) => {
+                console.log(
+                    element.getAttribute('name'),
+                    '=>',
+                    element.getAttribute('value')
+                )
+            })
+    }
+
     // ui render methods
     const renderPlantTypeSelectOption = (plant: Plant) => (
         <option key={plant.id} value={plant.id}>
@@ -28,13 +50,18 @@ export const Home = () => {
         </option>
     )
 
-    const renderMineralRequirementField = (mineral: Requirements) => (
-        <Row key={mineral.name}>
+    const renderRequirementField = (requirement: Requirements) => (
+        <Row key={requirement.name}>
             <Col md={6}>
-                {mineral.name} ({mineral.unit})
+                {requirement.name} ({requirement.unit})
             </Col>
             <Col md={6}>
-                <Form.Control type='number' defaultValue={mineral.avg} />
+                <Form.Control
+                    className={REQUIREMENT_FIELD}
+                    name={requirement.name}
+                    type='text'
+                    defaultValue={requirement.avg}
+                />
             </Col>
         </Row>
     )
@@ -47,7 +74,7 @@ export const Home = () => {
                 </Col>
             </Row>
             <hr />
-            <Form>
+            <Form onSubmit={formSubmitEvent} ref={formRef}>
                 <Row className='justify-content-center mb-4'>
                     <Col md={6}>
                         <Form.Group controlId='exampleForm.ControlSelect1'>
@@ -65,11 +92,11 @@ export const Home = () => {
                 <Row>
                     <Col md={3}>
                         {selectedPlant.requirements.minerals.map(
-                            renderMineralRequirementField
+                            renderRequirementField
                         )}
                     </Col>
                     <Col md={4}>
-                        <Button variant='primary' block>
+                        <Button variant='primary' type='submit' block>
                             Calculate
                         </Button>
                     </Col>
