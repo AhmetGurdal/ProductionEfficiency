@@ -5,10 +5,12 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 import { NavigBar } from 'production-efficiency/components'
 import { About, Home } from 'production-efficiency/pages'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 const App = () => (
     <Router>
         <div>
             <NavigBar />
+
             <main className='pt-4'>
                 <Switch>
                     <Route path='/about'>

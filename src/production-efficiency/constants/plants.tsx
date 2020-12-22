@@ -1,10 +1,11 @@
 import { Plant } from 'production-efficiency/models'
 
 const tomato: Plant = {
+    id: 0,
     name: 'Tomato',
     description: 'I am an aweful red tomato ;)',
     requirements: {
-        mineral: [
+        minerals: [
             {
                 name: 'Nitrogen',
                 unit: '%',
@@ -78,11 +79,13 @@ const tomato: Plant = {
         ]
     }
 }
-const fasulye : Plant = {
+
+const fasulye: Plant = {
+    id: 1,
     name: 'Fasulya',
     description: 'I am an aweful red tomato ;)',
     requirements: {
-        mineral: [
+        minerals: [
             {
                 name: 'Nitrogen',
                 unit: '%',
@@ -96,27 +99,6 @@ const fasulye : Plant = {
                 min: 0.26,
                 max: 0.71,
                 avg: 0.6
-            },
-            {
-                name: 'Potassum',
-                unit: '%',
-                min: 3.06,
-                max: 5.43,
-                avg: 4.3
-            },
-            {
-                name: 'Sulfur',
-                unit: '%',
-                min: 0.94,
-                max: 4.15,
-                avg: 2.3
-            },
-            {
-                name: 'Calcium',
-                unit: '%',
-                min: 0.94,
-                max: 4.15,
-                avg: 2.3
             },
             {
                 name: 'Magnesium',
@@ -156,4 +138,4 @@ const fasulye : Plant = {
         ]
     }
 }
-export const PLANT_LIST: Plant[] = [tomato,fasulye]
+export const PLANT_LIST: Plant[] = [tomato, fasulye]

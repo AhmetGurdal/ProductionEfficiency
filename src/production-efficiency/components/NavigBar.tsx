@@ -7,6 +7,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import { Nav, Navbar } from 'react-bootstrap'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const NavigBar = () => {
     return (
         <Navbar bg='light' expand='lg'>

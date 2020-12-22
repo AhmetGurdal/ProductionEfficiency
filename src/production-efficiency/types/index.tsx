@@ -1,1 +1,1 @@
-export type RequirementType = 'mineral'
+export type RequirementType = 'minerals'
