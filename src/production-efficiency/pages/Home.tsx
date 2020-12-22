@@ -1,6 +1,6 @@
 // eslint-disable-next-line no-use-before-define
-import React, { useState, useRef } from 'react'
-import { Container, Row, Col, Form, Button } from 'react-bootstrap'
+import React, { useState } from 'react'
+import { Container, Row, Col, Form } from 'react-bootstrap'
 import { PLANT_LIST } from 'production-efficiency/constants/'
 import { Plant, Requirements } from 'production-efficiency/models'
 
@@ -8,16 +8,12 @@ export const Home = () => {
     const INITIAL_PLANT = PLANT_LIST[0]
     const REQUIREMENT_FIELD = 'requirement-field'
 
-    const formRef = useRef<HTMLFormElement>(null)
-
     // states
     const [selectedPlantId, setSelectedPlantId] = useState<number>(
         INITIAL_PLANT.id
     )
 
-    // const [formSubmitState, setFormSubmitState] = useState<
-    //     Record<string, string>
-    // >({})
+    const [formFields, setFormFields] = useState<Record<string, string>>({})
 
     // constants
     const selectedPlant: Plant = PLANT_LIST[selectedPlantId]
@@ -25,22 +21,8 @@ export const Home = () => {
     // events
     const plantTypeSelectEvent = (event: React.ChangeEvent<any>) => {
         setSelectedPlantId(parseInt(event.target.value))
+        
         // ...
-    }
-
-    const formSubmitEvent = (event: React.FormEvent<any>) => {
-        event.preventDefault()
-        const collection = formRef.current?.getElementsByClassName(
-            REQUIREMENT_FIELD
-        )
-        collection &&
-            Array.from(collection).forEach((element) => {
-                console.log(
-                    element.getAttribute('name'),
-                    '=>',
-                    element.getAttribute('value')
-                )
-            })
     }
 
     // ui render methods
@@ -49,6 +31,17 @@ export const Home = () => {
             {plant.name}
         </option>
     )
+
+    const handleInputChange = (
+        index: string,
+        event: React.ChangeEvent<any>
+    ) => {
+        const values = formFields
+        values[index] = event.target.value
+
+        console.log(values)
+        setFormFields(values)
+    }
 
     const renderRequirementField = (requirement: Requirements) => (
         <Row key={requirement.name}>
@@ -60,7 +53,9 @@ export const Home = () => {
                     className={REQUIREMENT_FIELD}
                     name={requirement.name}
                     type='text'
-                    defaultValue={requirement.avg}
+                    onChange={(event) =>
+                        handleInputChange(requirement.name, event)
+                    }
                 />
             </Col>
         </Row>
@@ -74,7 +69,7 @@ export const Home = () => {
                 </Col>
             </Row>
             <hr />
-            <Form onSubmit={formSubmitEvent} ref={formRef}>
+            <Form>
                 <Row className='justify-content-center mb-4'>
                     <Col md={6}>
                         <Form.Group controlId='exampleForm.ControlSelect1'>
@@ -95,11 +90,7 @@ export const Home = () => {
                             renderRequirementField
                         )}
                     </Col>
-                    <Col md={4}>
-                        <Button variant='primary' type='submit' block>
-                            Calculate
-                        </Button>
-                    </Col>
+
                     <Col md={5} className='text-center'>
                         <h2>95%</h2>
                     </Col>
