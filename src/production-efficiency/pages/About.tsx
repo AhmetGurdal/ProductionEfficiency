@@ -31,7 +31,10 @@ export const About = () => {
                     collection &&
                         Array.from(collection).forEach((element) => {
                             // console.log(element)
-                            console.log(element.getAttribute('name'), element.getAttribute('value'))
+                            console.log(
+                                element.getAttribute('name'),
+                                element.getAttribute('value')
+                            )
                         })
                 }}
             >

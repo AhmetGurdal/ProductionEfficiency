@@ -2,22 +2,48 @@
 import React, { useState } from 'react'
 import { Container, Row, Col, Form, Button } from 'react-bootstrap'
 import { PLANT_LIST } from 'production-efficiency/constants/'
-import { Plant } from 'production-efficiency/models'
+import { Plant, Requirements } from 'production-efficiency/models'
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const Home = () => {
+    const INITIAL_PLANT = PLANT_LIST[0]
+
+    // states
     const [selectedPlantId, setSelectedPlantId] = useState<number>(
-        PLANT_LIST[0].id
+        INITIAL_PLANT.id
     )
+
+    // constants
     const selectedPlant: Plant = PLANT_LIST[selectedPlantId]
+
+    // events
+    const plantTypeSelectEvent = (event: React.ChangeEvent<any>) => {
+        setSelectedPlantId(parseInt(event.target.value))
+        // ...
+    }
+
+    // ui render methods
+    const renderPlantTypeSelectOption = (plant: Plant) => (
+        <option key={plant.id} value={plant.id}>
+            {plant.name}
+        </option>
+    )
+
+    const renderMineralRequirementField = (mineral: Requirements) => (
+        <Row key={mineral.name}>
+            <Col md={6}>
+                {mineral.name} ({mineral.unit})
+            </Col>
+            <Col md={6}>
+                <Form.Control type='number' defaultValue={mineral.avg} />
+            </Col>
+        </Row>
+    )
+
     return (
         <Container fluid>
             <Row className='text-center'>
                 <Col md={12}>
-                    <h2>
-                        Efficiency Calculator (
-                        {PLANT_LIST[selectedPlantId].name})
-                    </h2>
+                    <h2>Efficiency Calculator ({selectedPlant.name})</h2>
                 </Col>
             </Row>
             <hr />
@@ -28,19 +54,9 @@ export const Home = () => {
                             <Form.Control
                                 as='select'
                                 value={selectedPlantId}
-                                onChange={(event) => {
-                                    setSelectedPlantId(
-                                        parseInt(event.target.value)
-                                    )
-                                }}
+                                onChange={plantTypeSelectEvent}
                             >
-                                {PLANT_LIST.map((plant) => {
-                                    return (
-                                        <option key={plant.id} value={plant.id}>
-                                            {plant.name}
-                                        </option>
-                                    )
-                                })}
+                                {PLANT_LIST.map(renderPlantTypeSelectOption)}
                             </Form.Control>
                         </Form.Group>
                     </Col>
@@ -49,24 +65,7 @@ export const Home = () => {
                 <Row>
                     <Col md={3}>
                         {selectedPlant.requirements.minerals.map(
-                            (_mineral, index) => {
-                                return (
-                                    <Row
-                                        key={_mineral.name}
-                                        className={index === 0 ? '' : 'mt-4'}
-                                    >
-                                        <Col md={6}>
-                                            {_mineral.name} ({_mineral.unit})
-                                        </Col>
-                                        <Col md={6}>
-                                            <Form.Control
-                                                type='number'
-                                                defaultValue={_mineral.avg}
-                                            />
-                                        </Col>
-                                    </Row>
-                                )
-                            }
+                            renderMineralRequirementField
                         )}
                     </Col>
                     <Col md={4}>
