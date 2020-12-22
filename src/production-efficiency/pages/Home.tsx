@@ -4,6 +4,7 @@ import { Container, Row, Col, Form } from 'react-bootstrap'
 import { PLANT_LIST } from 'production-efficiency/constants/'
 import { Plant, Requirements } from 'production-efficiency/models'
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export const Home = () => {
     const INITIAL_PLANT = PLANT_LIST[0]
     const REQUIREMENT_FIELD = 'requirement-field'
