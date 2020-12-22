@@ -12,8 +12,8 @@ export const Home = () => {
     const [selectedPlantId, setSelectedPlantId] = useState<number>(
         INITIAL_PLANT.id
     )
-
     const [formFields, setFormFields] = useState<Record<string, string>>({})
+    const [efficiency, setEfficiency] = useState<number>(0)
 
     // constants
     const selectedPlant: Plant = PLANT_LIST[selectedPlantId]
@@ -21,8 +21,14 @@ export const Home = () => {
     // events
     const plantTypeSelectEvent = (event: React.ChangeEvent<any>) => {
         setSelectedPlantId(parseInt(event.target.value))
-        
-        // ...
+
+        // reset form values and states
+        setEfficiency(0)
+        setFormFields({})
+
+        Array.from(document.querySelectorAll('input')).forEach(
+            (input) => (input.value = '')
+        )
     }
 
     // ui render methods
@@ -32,26 +38,34 @@ export const Home = () => {
         </option>
     )
 
+    const magicFunc = () => {
+        let tempEfficieny = 0
+
+        Object.keys(formFields).forEach((key) => {
+            tempEfficieny += parseFloat(formFields[key])
+        })
+
+        setEfficiency(tempEfficieny)
+    }
+
     const handleInputChange = (
         index: string,
         event: React.ChangeEvent<any>
     ) => {
         const values = formFields
         values[index] = event.target.value
-
-        console.log(values)
         setFormFields(values)
+        magicFunc()
     }
 
     const renderRequirementField = (requirement: Requirements) => (
-        <Row key={requirement.name}>
-            <Col md={6}>
-                {requirement.name} ({requirement.unit})
-            </Col>
-            <Col md={6}>
+        <Row key={requirement.name} className='justify-content-center m-1'>
+            <Col md={2}>{requirement.name}</Col>
+            <Col md={10}>
                 <Form.Control
                     className={REQUIREMENT_FIELD}
                     name={requirement.name}
+                    placeholder={requirement.unit}
                     type='text'
                     onChange={(event) =>
                         handleInputChange(requirement.name, event)
@@ -70,9 +84,12 @@ export const Home = () => {
             </Row>
             <hr />
             <Form>
-                <Row className='justify-content-center mb-4'>
+                <Row className='justify-content-center'>
                     <Col md={6}>
-                        <Form.Group controlId='exampleForm.ControlSelect1'>
+                        <Form.Group
+                            controlId='exampleForm.ControlSelect1'
+                            className='m-2'
+                        >
                             <Form.Control
                                 as='select'
                                 value={selectedPlantId}
@@ -84,15 +101,15 @@ export const Home = () => {
                     </Col>
                 </Row>
 
+                <Row md={5} className='text-center justify-content-center'>
+                    {efficiency ? <h1>{efficiency}%</h1> : null}
+                </Row>
+
                 <Row>
-                    <Col md={3}>
+                    <Col md={12}>
                         {selectedPlant.requirements.minerals.map(
                             renderRequirementField
                         )}
-                    </Col>
-
-                    <Col md={5} className='text-center'>
-                        <h2>95%</h2>
                     </Col>
                 </Row>
             </Form>
