@@ -41,12 +41,36 @@ export const Home = () => {
 
     const magicFunc = () => {
         let tempEfficieny = 0
+        let sufficient = true
+        let counter = 0
 
         Object.keys(formFields).forEach((key) => {
-            tempEfficieny += parseFloat(formFields[key])
-        })
+            const value: number = parseFloat(formFields[key])
 
-        setEfficiency(tempEfficieny)
+            const temp: any = selectedPlant.requirements.minerals.filter(
+                (x) => x.name === key
+            )[0]
+            if (!isNaN(value)) {
+                if (value > temp.max) {
+                    sufficient = false
+                } else if (value >= temp.avg) {
+                    tempEfficieny += (-1 / -value) * (100 * temp.avg)
+                } else {
+                    tempEfficieny +=
+                        (value - temp.min) * (100 / (temp.avg - temp.min))
+                    if (tempEfficieny <= 0) {
+                        sufficient = false
+                    }
+                }
+                counter += 1
+            }
+        })
+        tempEfficieny = Math.round(tempEfficieny)
+        if (!sufficient) {
+            tempEfficieny = 0.000000000001
+        }
+
+        setEfficiency(tempEfficieny / counter)
     }
 
     const handleInputChange = (
@@ -103,7 +127,7 @@ export const Home = () => {
                 </Row>
 
                 <Row md={5} className='text-center justify-content-center'>
-                    {efficiency ? <h1>{efficiency}%</h1> : null}
+                    {efficiency ? <h1>{efficiency} %</h1> : null}
                 </Row>
 
                 <Row>
